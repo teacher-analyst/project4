@@ -1,0 +1,186 @@
+<html>
+
+<head>
+    <title>Descision Tree Model</title>
+    <style>
+        .head1 {
+            font-size: 40px;
+            color: #009900;
+            font-weight: bold;
+            text-align: center;
+            font-family: "Gill Sans", sans-serif;
+        }
+ 
+        .head2 {
+            font-size: 17px;
+            margin-left: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-family: "Gill Sans", sans-serif;
+
+        }
+ 
+        body {
+            font-size: 17px;
+            margin: 0 auto;
+            background-position: center;
+            background-size: contain;
+            font-family: "Gill Sans", sans-serif;
+        }
+ 
+        footer {
+            width: 100%;
+            bottom: 0px;
+            background-color: #000;
+            color: #fff;
+            position: absolute;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+ 
+        .body_sec {
+            margin-left: 400px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="head1">
+              Form
+          </div>
+        <div class="head2">
+              A tool for determining Local Goverment Areas that need emergency service resources
+          </div>
+    </header>
+<div style="background-color: rgb(241, 232, 226); width: 50%; height: 660px; float:left;">
+    
+ <!-- Body section -->   
+ <main class="body_sec">
+    <section id="Content">
+
+  <form action="/result" method="POST">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <label for="day_of_Week">Day of the Week</label>
+    <select id="day_of_Week" name="day_of_Week">
+      <option value="0">Sunday</option>
+      <option value="1">Monday</option>
+      <option value="2">Tuesday</option>
+      <option value="3">Wednesday</option>
+      <option value="4">Thursday</option>
+      <option value="5">Friday</option>
+      <option value="6">Saturday</option>
+    </select>
+    <br>
+    <br>
+    <label for="accident_type">Accident Type</label>
+    <select id="accident_type" name="accident_type">
+      <option value="0">Collision with a fixed object</option>
+      <option value="1">Collision with vehicle</option>
+      <option value="2">Fall from or in moving vehicle</option>
+    </select>
+    <br>
+    <br>
+    <label for="light_condition">Light Condition</label>
+    <select id="light_condition" name="light_condition">
+      <option value="0">Dark no street lights</option>
+      <option value="1">Dark street lights off</option>
+      <option value="2">Dark street lights on</option>
+      <option value="3">Dark street lights unknown</option>
+      <option value="4">Day</option>
+      <option value="5">Dusk/dawn</option>
+      <option value="6">Unknown</option>
+    </select>
+    <br>
+    <br>
+    <label for="road_geom">Road Geometry</label>
+    <select id="road_geom" name="road_geom">
+      <option value="0">Cross intersection</option>
+      <option value="1">Dead end</option>
+      <option value="2">Multiple intersection</option>
+      <option value="3">Not a intersection</option>
+      <option value="3">Private property</option>
+      <option value="4">Road closure</option>
+      <option value="5">T intersection</option>
+      <option value="7">Y intersection</option>
+      <option value="6">Unknown</option>
+    </select>
+    <br>
+    <br>
+    <label for="speed_zone">Speed Zone</label>
+    <select id="speed_zone" name="speed_zone">
+      <option value="0">100 km/hr</option>
+      <option value="1">110 km/hr></option>
+      <option value="2">40 km/hr</option>
+      <option value="3">50 km/hr</option>
+      <option value="4">60 km/hr</option>
+      <option value="5">70 km/hr</option>
+      <option value="6">80 km/hr</option>
+      <option value="7">90 km/hr</option>
+    </select>
+    <br>
+    <br>
+    <label for="road_type">Road Type</label>
+    <select id="road_type" name="road_type">
+      <option value="0">Arterial Highway</option>
+      <option value="1">Arterial other</option>
+      <option value="2">Local road</option>
+      <option value="3">Other</option>
+      <option value="4">Freeway, arterial other</option>
+    </select>
+    <br>
+    <br>
+    <label for="severity">Severity</label>
+    <select id="severity" name="severity">
+      <option value="0">Fatal accident</option>
+      <option value="1">Non injury accident</option>
+      <option value="2">Other injury accident</option>
+      <option value="3">Serious injury accident </option>
+    </select>
+    <br>
+    <br>
+    <label for="region">Region Name</label>
+    <select id="region" name="region">
+      <option value="0">Eastern region</option>
+      <option value="1">Metropolitan north west region</option>
+      <option value="2">Metropolitan South East Region</option>
+      <option value="3">North eastern region</option>
+      <option value="4">Northern region</option>
+      <option value="5">Metropolitan South East Region</option>
+      <option value="2">South western region</option>
+      <option value="2">Western region</option>
+    </select>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+    </section>
+</main>
+
+
+<!-- Footer Section -->
+<footer>Footer Section</footer>
+
+</div>
+
+<div style="background-color: rgb(241, 232, 226); width:50%; height: 660px; float:left; text-align: center;">  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  Prediction output will go here.  
+        </div>  
+
+
+</body>
+</html>
