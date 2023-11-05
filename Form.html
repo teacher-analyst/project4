@@ -87,6 +87,12 @@
       <option value="0">Collision with a fixed object</option>
       <option value="1">Collision with vehicle</option>
       <option value="2">Fall from or in moving vehicle</option>
+      <option value="3">No collision and no object struck</option>
+      <option value="4">Other accident</option>
+      <option value="5">Struck Pedestrian</option>
+      <option value="6">Struck animal</option>
+      <option value="7">Vehicle overturned (no collision)</option>
+      <option value="8">Collision with some other object</option>
     </select>
     <br>
     <br>
@@ -107,12 +113,12 @@
       <option value="0">Cross intersection</option>
       <option value="1">Dead end</option>
       <option value="2">Multiple intersection</option>
-      <option value="3">Not a intersection</option>
-      <option value="3">Private property</option>
-      <option value="4">Road closure</option>
-      <option value="5">T intersection</option>
+      <option value="3">Not at intersection</option>
+      <option value="4">Private property</option>
+      <option value="5">Road closure</option>
+      <option value="6">T intersection</option>
       <option value="7">Y intersection</option>
-      <option value="6">Unknown</option>
+      <option value="8">Unknown</option>
     </select>
     <br>
     <br>
@@ -132,32 +138,37 @@
     <label for="road_type">Road Type</label>
     <select id="road_type" name="road_type">
       <option value="0">Arterial Highway</option>
-      <option value="1">Arterial other</option>
-      <option value="2">Local road</option>
-      <option value="3">Other</option>
-      <option value="4">Freeway, arterial other</option>
+      <option value="1">Arterial Highway, Arterial Other</option>
+      <option value="2">Arterial Highway, Local Road</option>
+      <option value="3">Arterial other</option>
+      <option value="4">Arterial Other, Arterial Highway</option>
+      <option value="5">Arterial Other, Local Road</option>
+      <option value="6">Freeway</option>
+      <option value="7">Freeway, Arterial Other</option>
+      <option value="8">Local Road</option>
+      <option value="9">Local Road, Arterial Highway</option>
+      <option value="10">Local Road, Arterial Other</option>
+      <option value="11">Other</option>
     </select>
     <br>
     <br>
     <label for="severity">Severity</label>
     <select id="severity" name="severity">
       <option value="0">Fatal accident</option>
-      <option value="1">Non injury accident</option>
-      <option value="2">Other injury accident</option>
-      <option value="3">Serious injury accident </option>
+      <option value="1">Other injury accident</option>
+      <option value="2">Serious injury accident </option>
     </select>
     <br>
     <br>
     <label for="region">Region Name</label>
     <select id="region" name="region">
-      <option value="0">Eastern region</option>
-      <option value="1">Metropolitan north west region</option>
+      <option value="0">Eastern Region</option>
+      <option value="1">Metropolitan North West region</option>
       <option value="2">Metropolitan South East Region</option>
-      <option value="3">North eastern region</option>
-      <option value="4">Northern region</option>
-      <option value="5">Metropolitan South East Region</option>
-      <option value="2">South western region</option>
-      <option value="2">Western region</option>
+      <option value="3">North Eastern Region</option>
+      <option value="4">Northern Region</option>
+      <option value="5">South Western Region</option>
+      <option value="6">Western Region</option>
     </select>
     <br>
     <br>
