@@ -1,6 +1,7 @@
 # Import flask
 from flask import Flask, jsonify
 import pandas as pd
+import json 
 from sklearn.preprocessing import StandardScaler
 from sklearn import tree
 import pickle
@@ -11,8 +12,8 @@ with open('scaler.pkl','rb') as f:
 
 treem = pickle.load(open('tree_model.sav', 'rb'))
 
-empty_case = pd.DataFrame([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], 
+empty_case = pd.DataFrame([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]], 
                                columns=['DAY_OF_WEEK_1', 'DAY_OF_WEEK_2', 'DAY_OF_WEEK_3', 'DAY_OF_WEEK_4', 'DAY_OF_WEEK_5',
                                  'DAY_OF_WEEK_6', 'DAY_OF_WEEK_7', 'ACCIDENT_TYPE_Collision with a fixed object',
                                  'ACCIDENT_TYPE_Collision with vehicle', 'ACCIDENT_TYPE_Fall from or in moving vehicle',
@@ -41,7 +42,8 @@ empty_case = pd.DataFrame([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
                                  'REGION_NAME_NORTH EASTERN REGION', 'REGION_NAME_NORTHERN REGION', 
                                  'REGION_NAME_SOUTH WESTERN REGION', 'REGION_NAME_WESTERN REGION'])
 
-output_dict = json.load(open('output.json'))
+with open("output.json") as file:
+    output_dict  = json.load(file)
 
 
 def create_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name, empty_case):
@@ -183,7 +185,7 @@ def create_case(day_of_week, accident_type, light_condition, road_geometry, spee
     return case 
 
 def load_output(prediction):
-    return output_dict(prediction)
+    return output_dict[prediction]
 
 # Create the app
 app = Flask(__name__)
@@ -196,13 +198,19 @@ def home():
         f"/api/v1.0/DAY_OF_WEEK/ACCIDENT_TYPE/LIGHT_CONDITION/ROAD_GEOMETRY/SPEED_ZONE/ROAD_TYPE/SEVERITY/REGION_NAME"
     )
 
-@app.route("/api/v1.0/<DAY_OF_WEEK>/<ACCIDENT_TYPE>/<LIGHT_CONDITION>/<ROAD_GEOMETRY>/<SPEED_ZONE>/<ROAD_TYPE>/<SEVERITY>/<REGION_NAME>")
+@app.route("/api/v1.0/<day_of_week>/<accident_type>/<light_condition>/<road_geometry>/<speed_zone>/<road_type>/<severity>/<region_name>")
 def predict_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name):
 
-    case = create_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name)
+    case = create_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name, empty_case)
 
     case_scaled = scaler.transform(case)
 
     prediction = treem.predict(case_scaled)
 
-    return load_output(prediction)
+    response = jsonify(load_output(prediction[0]))
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+#run in debugging mode
+if __name__ == '__main__':
+    app.run(debug=True) 
