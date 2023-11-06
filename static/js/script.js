@@ -14,8 +14,16 @@ function selectionSubmitted() {
 
     const prediction = `http://127.0.0.1:5000/api/v1.0/${day_of_week}/${accident_type}/${light_condition}/${road_geometry}/${speed_zone}/${road_type}/${severity}/${region_name}`
     const predictionPromise = d3.json(prediction);
-    console.log("Prediction Promise: ", predictionPromise)
-    console.log(prediction)
 
+    let list_element=d3.select("#dynamicList");
     
+    prediction.forEach((item) => {
+        let li = 
+            document.createElement("li");
+        li.innerText = item;
+        list.appendChild(li);
+    });
+
+    // list_element.append("li").text(item)
+ 
 }
