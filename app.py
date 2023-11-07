@@ -44,26 +44,29 @@ empty_case = pd.DataFrame([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
 with open("output.json") as file:
     output_dict  = json.load(file)
+    #print(output_dict)
 
 
 def create_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name, empty_case):
 
     case = empty_case
 
-    if day_of_week == 1:
+    if day_of_week == 0:
         case['DAY_OF_WEEK_1'] = 1
-    elif day_of_week == 2:
+    elif day_of_week == 1:
         case['DAY_OF_WEEK_2'] = 1
-    elif day_of_week == 3:
+    elif day_of_week == 2:
         case['DAY_OF_WEEK_3'] = 1
-    elif day_of_week == 4:
+    elif day_of_week == 3:
         case['DAY_OF_WEEK_4'] = 1
-    elif day_of_week == 5:
+    elif day_of_week == 4:
         case['DAY_OF_WEEK_5'] = 1
-    elif day_of_week == 6:
+    elif day_of_week == 5:
         case['DAY_OF_WEEK_6'] = 1
-    elif day_of_week == 7:
+    elif day_of_week == 6:
         case['DAY_OF_WEEK_7'] = 1
+    else:
+        print('day of week if not working', day_of_week)
 
     if accident_type == 0:
         case['ACCIDENT_TYPE_Collision with a fixed object'] = 1
@@ -184,8 +187,31 @@ def create_case(day_of_week, accident_type, light_condition, road_geometry, spee
     
     return case 
 
-def load_output(prediction):
-    return output_dict[prediction]
+def load_output(region_name, prediction):
+
+    region = ''
+
+    if region_name == 0:
+        region = 'EASTERN REGION'
+    elif region_name == 1:
+        region = 'METROPOLITAN NORTH WEST REGION'
+    elif region_name == 2:
+        region = 'METROPOLITAN SOUTH EAST REGION'
+    elif region_name == 3:
+        region = 'NORTH EASTERN REGION'
+    elif region_name == 4:
+        region = 'NORTHERN REGION'
+    elif region_name == 5:
+        region = 'SOUTH WESTERN REGION'
+    elif region_name == 6:
+        region = 'WESTERN REGION'
+    else:
+        print('region if not working in load output')
+
+
+    pred_array = "('" + region + "', '" + prediction + "')"
+
+    return output_dict[pred_array]
 
 # Create the app
 app = Flask(__name__)
@@ -200,6 +226,15 @@ def home():
 
 @app.route("/api/v1.0/<day_of_week>/<accident_type>/<light_condition>/<road_geometry>/<speed_zone>/<road_type>/<severity>/<region_name>")
 def predict_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name):
+    day_of_week = int(day_of_week)
+    accident_type = int(accident_type)
+    light_condition = int(light_condition)
+    road_geometry = int(road_geometry)
+    speed_zone = int(speed_zone)
+    road_type = int(road_type)
+    severity = int(severity)
+    region_name = int(region_name)
+
 
     case = create_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name, empty_case)
 
@@ -207,7 +242,9 @@ def predict_case(day_of_week, accident_type, light_condition, road_geometry, spe
 
     prediction = treem.predict(case_scaled)
 
-    response = jsonify(load_output(prediction[0]))
+    print('api called successfully', day_of_week)
+
+    response = jsonify(load_output(region_name, prediction[0]))
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
