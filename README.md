@@ -1,7 +1,6 @@
 # Group Project 4
 ## <i>A supervised learning model predicting accident prone areas in Victoria.</i>
 
-***
 ## Project Overview
  To work cohesively as a team to create a machine learning model that is linked to a front end web application as depicted in the image below: 
 <img width="760" alt="image" src="https://github.com/teacher-analyst/project4/assets/130710065/0cca414d-5f6c-44eb-9080-5f5a183161aa">
