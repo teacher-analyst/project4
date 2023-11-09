@@ -1,4 +1,4 @@
-# Import flask
+#import dependencies
 from flask import Flask, jsonify
 import pandas as pd
 import json 
@@ -7,11 +7,12 @@ from sklearn import tree
 import pickle
 
 #load in scaler and model
-with open('scaler.pkl','rb') as f:
+with open('model/scaler.pkl','rb') as f:
     scaler = pickle.load(f)
 
-treem = pickle.load(open('tree_model.sav', 'rb'))
+treem = pickle.load(open('model/tree_model.sav', 'rb'))
 
+#define our empty case
 empty_case = pd.DataFrame([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]], 
                                columns=['DAY_OF_WEEK_1', 'DAY_OF_WEEK_2', 'DAY_OF_WEEK_3', 'DAY_OF_WEEK_4', 'DAY_OF_WEEK_5',
@@ -42,15 +43,18 @@ empty_case = pd.DataFrame([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                                  'REGION_NAME_NORTH EASTERN REGION', 'REGION_NAME_NORTHERN REGION', 
                                  'REGION_NAME_SOUTH WESTERN REGION', 'REGION_NAME_WESTERN REGION'])
 
-with open("output.json") as file:
+#load in the output possibilities
+with open("data cleaning and prep/output.json") as file:
     output_dict  = json.load(file)
     #print(output_dict)
 
-
+#this function takes the user inputs and create a case with them to run through the model
 def create_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name, empty_case):
 
+    #grab a copy of our empty case
     case = empty_case
 
+    #these if statements determine which columns in the empty case to change into 1's based on the user input
     if day_of_week == 0:
         case['DAY_OF_WEEK_1'] = 1
     elif day_of_week == 1:
@@ -65,8 +69,6 @@ def create_case(day_of_week, accident_type, light_condition, road_geometry, spee
         case['DAY_OF_WEEK_6'] = 1
     elif day_of_week == 6:
         case['DAY_OF_WEEK_7'] = 1
-    else:
-        print('day of week if not working', day_of_week)
 
     if accident_type == 0:
         case['ACCIDENT_TYPE_Collision with a fixed object'] = 1
@@ -187,6 +189,7 @@ def create_case(day_of_week, accident_type, light_condition, road_geometry, spee
     
     return case 
 
+#this function takes the region name user input and DEG_URBAN prediction from the model and calls the appropriate output list
 def load_output(region_name, prediction):
 
     region = ''
@@ -208,7 +211,7 @@ def load_output(region_name, prediction):
     else:
         print('region if not working in load output')
 
-
+    #create the string to index the dict with the output lists
     pred_array = "('" + region + "', '" + prediction + "')"
 
     return output_dict[pred_array]
@@ -216,6 +219,7 @@ def load_output(region_name, prediction):
 # Create the app
 app = Flask(__name__)
 
+#home page with list of routes
 @app.route("/")
 def home():
     """List all available API routes."""
@@ -224,8 +228,10 @@ def home():
         f"/api/v1.0/DAY_OF_WEEK/ACCIDENT_TYPE/LIGHT_CONDITION/ROAD_GEOMETRY/SPEED_ZONE/ROAD_TYPE/SEVERITY/REGION_NAME"
     )
 
+#define our dynamic route
 @app.route("/api/v1.0/<day_of_week>/<accident_type>/<light_condition>/<road_geometry>/<speed_zone>/<road_type>/<severity>/<region_name>")
 def predict_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name):
+    #convert all the inputs from strings to ints
     day_of_week = int(day_of_week)
     accident_type = int(accident_type)
     light_condition = int(light_condition)
@@ -235,15 +241,16 @@ def predict_case(day_of_week, accident_type, light_condition, road_geometry, spe
     severity = int(severity)
     region_name = int(region_name)
 
-
+    #create the case
     case = create_case(day_of_week, accident_type, light_condition, road_geometry, speed_zone, road_type, severity, region_name, empty_case)
 
+    #scale the case
     case_scaled = scaler.transform(case)
 
+    #make prediction with model
     prediction = treem.predict(case_scaled)
 
-    print('api called successfully', day_of_week)
-
+    #return the output
     response = jsonify(load_output(region_name, prediction[0]))
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response

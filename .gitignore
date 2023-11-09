@@ -1,2 +1,5 @@
 #ignore folders
 .ipynb_checkpoints
+data cleaning and prep/.ipynb_checkpoints
+analysis/.ipynb_checkpoints
+model/.ipynb_checkpoints
