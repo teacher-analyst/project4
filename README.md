@@ -94,7 +94,7 @@ Ultimately, we chose the Tree model as it was less taxing on our computers than 
 ### Conclusion
 Our supervised learning model has an accuracy of 83%. The accuracy may be sufficient in keeping people safe in certain LGA’s but may need to be improved to justify spending and targeting of resources. 
 
-#####Improvements
+#### Improvements
 - The solution can be improved by combining crash data with other data the LGA areas such population size, number of cars registers or socioeconomic data.
 - Model can make predictions specific to public holiday periods.
 - Removing the need to provide an input for all features in the form. So an employee may choose to make a prediction using only three out of eight features in the form.
