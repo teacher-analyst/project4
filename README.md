@@ -91,7 +91,13 @@ The Neural Network/Deep Learning tests were unsuccessful. We were aiming to pred
 Ultimately, we chose the Tree model as it was less taxing on our computers than the Random Forest. 
 
 ### Webpage 
+The webpage is presented such that the input features are positioned on the left of the webpage and the predictions appear on the right of the webpage (as can be seen in the image below). The predictioned LGA's will change based on the inputs.
 
+![image](https://github.com/teacher-analyst/project4/assets/130710065/5d6aee1e-5be5-474f-8e34-7d8419477bef)
+
+CSS was used to present the webpage and add a scrolable window if the predicted LGA list was too long to fit on the webpage. 
+
+Javascript was also employed to make the webpage interactive. The predictions on the right of the webpage are displayed by the javascript script. The javascript gets inputs from the form submitted in the webpage. The javascript calls the api which returns the list of lga names that are predicted to be prone to accidents. These predictions are loaded to the webpage using d3.select("#dynamicList") as a bulleted list. 
 
 ### Conclusion
 Our supervised learning model has an accuracy of 83%. The accuracy may be sufficient in keeping people safe in certain LGA’s but may need to be improved to justify spending and targeting of resources. 
