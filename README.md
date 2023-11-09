@@ -60,7 +60,9 @@
 ## Project details
 
 ### Data Retrieval & Cleaning 
+The data used in our project was retrieved from VicRoads. The dataset has data about fatal and injury crashes on Victorian roads over 5 years, 2015 - 2019. This time period is relevant and is more likely a more accurate predictor of accident prone areas in 2023 than data collected from 2020-2022 when there were heavy restrictions around movement of people in Victoria. The dataset has 65 columns and 60,689 records. It is important to note that majority of the data is qualitative. 
 
+The cleaning process began by reducing the number of columns from 65 to 23 columns. Then, unique values in each column was identified. This is important information for machine learning models. We initially decided to cluster the data to create an unsupervised learning model. The data was prepared by applying two methods. Columns that had more than 10 unique values were bucketed and any rare categories were placed in the 'other' bucket. The second method was one-hot encoding. Machine learning models accept quantitative data as inputs. The one-hot encoding method will ensure the data is changed from qualitative to quantitative data. 
 
 ### Analysis
 The numerical variables provided with the data did not contain any meaningful correlations. When running pearson correlation analysis across all combinations of the numerical variables provided, there were no meaningful correlations > 60%. 
@@ -90,7 +92,14 @@ Ultimately, we chose the Tree model as it was less taxing on our computers than 
 
 
 ### Conclusion
+Our supervised learning model has an accuracy of 83%. The accuracy may be sufficient in keeping people safe in certain LGA’s but may need to be improved to justify spending and targeting of resources. 
+
+#####Improvements
+- The solution can be improved by combining crash data with other data the LGA areas such population size, number of cars registers or socioeconomic data.
+- Model can make predictions specific to public holiday periods.
+- Removing the need to provide an input for all features in the form. So an employee may choose to make a prediction using only three out of eight features in the form.
 
 ***
-## Resources and Acknowledgements
+## Contributors 
+Evangeline & Hajar 
 
