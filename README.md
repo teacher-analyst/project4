@@ -81,7 +81,7 @@ Severity v Road Geometry
 
 These graphs show how severity is correlated with Light Condition and Road Geometry. We have similar graphs for other combinations in analysis/data_analysis_graphs.ipynb
 
-### Model
+### Machine Learning Model
 We initially were hoping to predict a single Local Government Area (LGA), of which there were 87 used within the data. We tried clustering the data, but even up to 87 clusters, there was no elbow for us to hone in on. We changed tack and looked at predicting a larger potential area. 
 
 The supervised learning to predict DEG_URBAN_NAME was very successful for both Tree and Random Forest, although Tree was much better for my computer’s processor. Even with a significantly reduced number of inputs, they were able to achieve over 80% accuracy. However, we learned that no meaningful level of accuracy could be achieved without some geographical data included in the models input. We therefore began including Region Name as input in all our model testing. 
@@ -89,6 +89,8 @@ The supervised learning to predict DEG_URBAN_NAME was very successful for both T
 The Neural Network/Deep Learning tests were unsuccessful. We were aiming to predict DEG_URBAN_NAME, which has 7 options, and we have included REGION_NAME in the input data. However, over 50 epochs the accuracy of the models plummeted from their initial 50-60%, down to less than 1%. Nothing we tried showed any promise in salvaging the models. 
 
 Ultimately, we chose the Tree model as it was less taxing on our computers than the Random Forest. 
+
+### Webpage 
 
 
 ### Conclusion
