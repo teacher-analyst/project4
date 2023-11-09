@@ -21,7 +21,32 @@
 
 ## File structure
 
-TBC
+├──Images
+│  ├──Elbow Curve.png
+│  ├──severity v light condition.png
+│  ├──severity v road geometry.png
+├──Resources
+│  ├──Road_Crashes_for_five_Years_Victoria.csv
+│  ├──crashes_cleaned_df.csv
+├──analysis
+│  ├──data_analysis_graphs.ipynb
+│  ├──dataanalysis_pvalues.ipynb
+├──data cleaning and prep
+│  ├──data_prep.ipynb
+│  ├──output.json
+│  ├──prep_output.ipynb
+├──model
+│  ├──data_modelling.ipynb
+│  ├──deep_learning_model.ipynb
+│  ├──scaler.pkl
+│  ├──tree_model.ipynb
+│  ├──tree_model.sav
+├──static/js
+│  ├──script.js
+├──.gitignore
+├──Form.html
+├──README.md
+├──app.py
 
 ## Tools
 - Python
