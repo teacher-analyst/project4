@@ -46,7 +46,7 @@
 ├──.gitignore\
 ├──Form.html\
 ├──README.md\
-├──app.py\
+├──app.py
 
 ## Tools
 - Python
@@ -68,10 +68,12 @@ The numerical variables provided with the data did not contain any meaningful co
 We did p-value analysis on various combinations of categorical variables, including Light Condition, Speed Zone, Road Geometry v Severity, or Fatality. The largest p-value we came across was 10^-30, indicating very strong correlations. 
 
 Severity v Light Condition
+
 <img width="503" alt="severity v light condition" src="https://github.com/teacher-analyst/project4/assets/61260651/3d7477de-3627-44f2-ad0a-dbf6bf7e033e">
 
 
 Severity v Road Geometry
+
 <img width="500" alt="severity v road geometry" src="https://github.com/teacher-analyst/project4/assets/61260651/646a779e-5874-4520-8085-4863093ae851">
 
 
