@@ -67,13 +67,24 @@ The numerical variables provided with the data did not contain any meaningful co
 
 We did p-value analysis on various combinations of categorical variables, including Light Condition, Speed Zone, Road Geometry v Severity, or Fatality. The largest p-value we came across was 10^-30, indicating very strong correlations. 
 
-[Severity v Light Condition](Images/severity v light condition.png)
+Severity v Light Condition
+<img width="503" alt="severity v light condition" src="https://github.com/teacher-analyst/project4/assets/61260651/3d7477de-3627-44f2-ad0a-dbf6bf7e033e">
 
-[Severity v Road Geometry](Images/severity v road geometry.png
 
-These graphs show how severity is correlated with Light Condition and Road Geometry.
+Severity v Road Geometry
+<img width="500" alt="severity v road geometry" src="https://github.com/teacher-analyst/project4/assets/61260651/646a779e-5874-4520-8085-4863093ae851">
+
+
+These graphs show how severity is correlated with Light Condition and Road Geometry. We have similar graphs for other combinations in analysis/data_analysis_graphs.ipynb
 
 ### Model
+We initially were hoping to predict a single Local Government Area (LGA), of which there were 87 used within the data. We tried clustering the data, but even up to 87 clusters, there was no elbow for us to hone in on. We changed tack and looked at predicting a larger potential area. 
+
+The supervised learning to predict DEG_URBAN_NAME was very successful for both Tree and Random Forest, although Tree was much better for my computer’s processor. Even with a significantly reduced number of inputs, they were able to achieve over 80% accuracy. However, we learned that no meaningful level of accuracy could be achieved without some geographical data included in the models input. We therefore began including Region Name as input in all our model testing. 
+
+The Neural Network/Deep Learning tests were unsuccessful. We were aiming to predict DEG_URBAN_NAME, which has 7 options, and we have included REGION_NAME in the input data. However, over 50 epochs the accuracy of the models plummeted from their initial 50-60%, down to less than 1%. Nothing we tried showed any promise in salvaging the models. 
+
+Ultimately, we chose the Tree model as it was less taxing on our computers than the Random Forest. 
 
 
 ### Conclusion
